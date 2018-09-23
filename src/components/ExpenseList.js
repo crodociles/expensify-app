@@ -16,9 +16,43 @@ export const ExpenseList = props => (
           <span>No expenses</span>
         </div>
       ) : (
-        props.expenses.map(expense => (
-          <ExpenseListItem key={expense.id} {...expense} />
-        ))
+        <div>
+          <div className="list-category">Rent</div>
+          {props.expenses.map(
+            expense =>
+              expense.category === "rent" && (
+                <ExpenseListItem key={expense.id} {...expense} />
+              )
+          )}
+          <div className="list-category">Entertainment</div>
+          {props.expenses.map(
+            expense =>
+              expense.category === "entertainment" && (
+                <ExpenseListItem key={expense.id} {...expense} />
+              )
+          )}
+          <div className="list-category">Food</div>
+          {props.expenses.map(
+            expense =>
+              expense.category === "food" && (
+                <ExpenseListItem key={expense.id} {...expense} />
+              )
+          )}
+          <div className="list-category">Travel</div>
+          {props.expenses.map(
+            expense =>
+              expense.category === "travel" && (
+                <ExpenseListItem key={expense.id} {...expense} />
+              )
+          )}
+          <div className="list-category">Other</div>
+          {props.expenses.map(
+            expense =>
+              expense.category === "other" && (
+                <ExpenseListItem key={expense.id} {...expense} />
+              )
+          )}
+        </div>
       )}
     </div>
   </div>

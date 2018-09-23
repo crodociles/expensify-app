@@ -1,7 +1,7 @@
 .list-header {
-    background: $off-white;
+    background: $dark-grey;
     border: 1px solid darken($off-white, 7%);
-    color: $grey;
+    color: $off-white;
     display: flex;
     justify-content: space-between;
     padding: $s-size $m-size;
@@ -57,7 +57,18 @@
 
 .list-body {
     margin-bottom: $m-size;
-    @media(min-width: $desktop-breakpoint) {
+    @media (min-width: $desktop-breakpoint) {
         margin-bottom: $l-size;
     }
+}
+
+.list-category {
+    border: 1px solid darken($off-white, 7%);
+    border-top: none;
+    padding: 0.2rem;
+    background: $off-white;
+    color: $grey;
+    font-size: $font-size-large;
+    text-align: center;
+    font-weight: 700;
 }

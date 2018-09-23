@@ -1,0 +1,5 @@
+
+1.  Confirmation modal on removal of expense
+2.  Show number of hidden expenses not covered by filter
+3.  Support for another login (facebook, github, twitter)
+4.  Buy custom domain and configure with heroku

@@ -10,6 +10,7 @@ export default class ExpenseForm extends React.Component {
       note: props.expense ? props.expense.note : "",
       amount: props.expense ? (props.expense.amount / 100).toString() : "",
       createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+      category: props.expense ? props.expense.category : "",
       calendarFocused: false,
       error: ""
     };
@@ -18,12 +19,6 @@ export default class ExpenseForm extends React.Component {
     const description = e.target.value;
     this.setState(() => ({
       description
-    }));
-  };
-  onNoteChange = e => {
-    const note = e.target.value;
-    this.setState(() => ({
-      note
     }));
   };
   onAmountChange = e => {
@@ -37,6 +32,19 @@ export default class ExpenseForm extends React.Component {
       this.setState(() => ({ createdAt }));
     }
   };
+  onNoteChange = e => {
+    const note = e.target.value;
+    this.setState(() => ({
+      note
+    }));
+  };
+  onCategoryChange = e => {
+    const category = e.target.value;
+    this.setState(() => ({
+      category
+    }));
+  };
+
   onFocusChange = ({ focused }) => {
     this.setState(() => ({ calendarFocused: focused }));
   };
@@ -50,6 +58,7 @@ export default class ExpenseForm extends React.Component {
     } else {
       this.setState(() => ({ error: "" }));
       this.props.onSubmit({
+        category: this.state.category,
         description: this.state.description,
         amount: parseFloat(this.state.amount, 10) * 100,
         createdAt: this.state.createdAt.valueOf(),
@@ -61,6 +70,20 @@ export default class ExpenseForm extends React.Component {
     return (
       <form className="form" onSubmit={this.onSubmit}>
         {this.state.error && <p className="form__error">{this.state.error}</p>}
+        <span className="input-label">Category</span>
+        <select
+          className="select"
+          onChange={this.onCategoryChange}
+          value={this.state.category}
+        >
+          <option />
+          <option value="food">Food/Groceries</option>
+          <option value="rent">Rent</option>
+          <option value="entertainment">Entertainment</option>
+          <option value="travel">Travel</option>
+          <option value="other">Other</option>
+        </select>
+        <span className="input-label">Description</span>
         <input
           className="text-input"
           type="text"
@@ -69,6 +92,7 @@ export default class ExpenseForm extends React.Component {
           value={this.state.description}
           onChange={this.onDescriptionChange}
         />
+        <span className="input-label">Amount</span>
         <input
           className="text-input"
           type="text"
@@ -76,6 +100,7 @@ export default class ExpenseForm extends React.Component {
           value={this.state.amount}
           onChange={this.onAmountChange}
         />
+        <span className="input-label">Date</span>
         <SingleDatePicker
           date={this.state.createdAt}
           onDateChange={this.onDateChange}
@@ -84,6 +109,7 @@ export default class ExpenseForm extends React.Component {
           numberOfMonths={1}
           isOutsideRange={() => false}
         />
+        <span className="input-label">Note</span>
         <textarea
           className="textarea"
           placeholder="Add a note for your expense (optional)"
